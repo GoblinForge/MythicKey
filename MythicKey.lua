@@ -15,7 +15,6 @@ AK:SetScript("OnEvent", function(self, event, addon)
         Frame:HookScript("OnShow", function()
             -- Deklariere Variablen
             local ID, Class, SubClass
-            local foundKeystone = false
 
             -- Iteriere über die Taschen des Spielers
             for bag = 0, NUM_BAG_FRAMES do
@@ -33,25 +32,20 @@ AK:SetScript("OnEvent", function(self, event, addon)
                         if (IDs[ID] or (Class == 5 and SubClass == 1)) then
                             -- Verwende den Gegenstand aus der Tasche
                             C_Container.UseContainerItem(bag, slot)
-
-                            -- Lege den Schlüssel automatisch in den Schlüsselslot
-                            if ChallengesKeystoneFrame.SlotContainer.slot then
-                                ChallengesKeystoneFrame.SlotContainer.slot.keyStoneID = ID
-                                ChallengesKeystoneFrame.SlotContainer.slot:SetAttribute("type", "macro")
-                                ChallengesKeystoneFrame.SlotContainer.slot:SetAttribute("macrotext", "/use item:" .. ID .. "\n/use [@player] " .. ID)
-                            end
-
-                            -- Markiere den gefundenen Schlüsselstein
-                            foundKeystone = true
-
-                            break
+                            -- Sende eine Nachricht im Chat, dass der Schlüsselstein eingelegt wurde
+                            print("Keystone inserted and ready for start!")
+                            -- Führe einen Ready-Check mit einer Verzögerung von 0,5 Sekunden aus
+                            C_Timer.After(0.5, function()
+                                -- Sende eine Nachricht im Chat, dass der Ready-Check gesendet wurde
+                                SendChatMessage("Ready check initiated. Please accept.", "PARTY")
+                                -- Führe den Ready-Check aus
+                                DoReadyCheck()
+                                -- Warte auf die READY_CHECK_FINISHED-Nachricht, um festzustellen, ob alle bereit sind
+                                AK:RegisterEvent("READY_CHECK_FINISHED")
+                            end)
+                            return
                         end
                     end
-                end
-
-                -- Beende die Schleife, wenn ein Schlüsselstein gefunden wurde
-                if foundKeystone then
-                    break
                 end
             end
         end)
@@ -67,7 +61,34 @@ AK:SetScript("OnEvent", function(self, event, addon)
             Frame:SetScript("OnDragStop", Frame.StopMovingOrSizing)
         end
 
-        -- Entregistriere das Event, da das Addon erfolgreich geladen wurde
-        self:UnregisterEvent(event)
+        -- Hänge ein Skript an das READY_CHECK_FINISHED
+        AK:RegisterEvent("READY_CHECK_FINISHED")
     end
 end)
+
+-- Erstelle ein Skript, das auf das READY_CHECK_FINISHED-Event reagiert
+AK:SetScript("OnEvent", function(self, event)
+    -- Überprüfe, ob das Event READY_CHECK_FINISHED ausgelöst wurde
+    if event == "READY_CHECK_FINISHED" then
+        -- Überprüfe, ob alle Spieler bereit sind
+        local allReady = true
+        for i = 1, GetNumGroupMembers() do
+            local _, _, _, _, _, readyStatus = GetRaidRosterInfo(i)
+            if readyStatus == nil or readyStatus == 0 then
+                allReady = false
+                break
+            end
+        end
+
+        -- Sende eine Nachricht im Chat, ob alle Spieler bereit sind oder nicht
+        if allReady then
+            print("Everyone is ready!")
+        else
+            print("Not everyone is ready!")
+        end
+
+        -- Unregister das READY_CHECK_FINISHED-Event, um eine erneute Registrierung zu vermeiden
+        AK:UnregisterEvent("READY_CHECK_FINISHED")
+    end
+end)
+
