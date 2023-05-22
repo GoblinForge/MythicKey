@@ -1,4 +1,3 @@
--- AutoKey
 local IDs = {[138019] = 1, [151086] = 1, [158923] = 1, [180653] = 1}
 local AK = CreateFrame("Frame")
 AK:RegisterEvent("ADDON_LOADED")
@@ -8,14 +7,13 @@ AK:SetScript("OnEvent", function(self, event, addon)
     end
 
     if ChallengesKeystoneFrame then
-        local Frame = ChallengesKeystoneFrame 
-        end
+        local Frame = ChallengesKeystoneFrame
         Frame:HookScript("OnShow", function()
             local ID, Class, SubClass
             for bag = 0, NUM_BAG_FRAMES do
                 for slot = 1, C_Container.GetContainerNumSlots(bag) do
                     ID = C_Container.GetContainerItemID(bag, slot)
-                    
+
                     if ID then
                         Class, SubClass = select(12, GetItemInfo(ID))
 
@@ -25,7 +23,6 @@ AK:SetScript("OnEvent", function(self, event, addon)
                             C_Timer.After(0.5, function()
                                 -- Sende eine Chat-Nachricht, dass der Schlüsselstein eingelegt wurde
                                 print("MythicKey: Keystone inserted and ready for start!")
-                                
                             end)
                             return
                         end

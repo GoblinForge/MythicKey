@@ -7,6 +7,7 @@
 
 ReadyCheck.lua
 AutoKey.lua
+timer.lua
 
 
 
