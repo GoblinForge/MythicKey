@@ -1,6 +1,6 @@
 ## Interface: 100100
 ## Author: 2iLuna
-## Version: 0.2.4
+## Version: 1.0.0
 ## Title: MythicKey
 ## Notes: Automatic insertion of keystones into the source of power of mystical time and queries all are ready!
 ## IconTexture: Interface\Icons\inv_relics_hourglass_02
