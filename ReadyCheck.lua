@@ -11,6 +11,7 @@ MythicKeyRdyFrame:SetScript("OnDragStop", MythicKeyRdyFrame.StopMovingOrSizing)
 MythicKeyRdyFrame:SetScript("OnShow", function(self)
     self:SetBackdropBorderColor(0, 0, 0) -- Setze die Rahmenfarbe auf Schwarz
 end)
+MythicKeyRdyFrame:Hide() -- Initial versteckt
 
 -- Erstelle den Ready Check Button
 local StartButton = CreateFrame("Button", "MythicKeyRdyStartButton", MythicKeyRdyFrame, "UIPanelButtonTemplate")
@@ -26,50 +27,55 @@ end)
 -- Erstelle den Close Button
 local CloseButton = CreateFrame("Button", "MythicKeyRdyCloseButton", MythicKeyRdyFrame, "UIPanelCloseButton")
 CloseButton:SetPoint("TOPRIGHT", -5, -5)
-CloseButton:SetScript("OnClick", function()
-    MythicKeyRdyFrame:Hide()
-end)
+CloseButton:SetScript("OnClick", function() MythicKeyRdyFrame:Hide() end)
 
 -- Funktion zum Öffnen des MythicKey-Ready-Check-Fensters
 local function OpenMythicKeyRdyFrame()
-    if IsInGroup() then
+    if IsInGroup() and not ChallengesKeystoneFrame:IsVisible() then
         MythicKeyRdyFrame:Show()
+    else
+        MythicKeyRdyFrame:Hide()
     end
 end
 
--- Überwache die Events, um das MythicKey-Ready-Check-Fenster zu öffnen
-local frame = CreateFrame("Frame")
-frame:RegisterEvent("GROUP_ROSTER_UPDATE")
-frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-frame:RegisterEvent("CHALLENGE_MODE_START")
-frame:RegisterEvent("BAG_UPDATE_DELAYED")
-frame:SetScript("OnEvent", function(self, event, ...)
-    if event == "GROUP_ROSTER_UPDATE" or event == "PLAYER_ENTERING_WORLD" then
-        OpenMythicKeyRdyFrame()
-    elseif event == "CHALLENGE_MODE_START" or event == "BAG_UPDATE_DELAYED" then
-        if IsInGroup() and ChallengesKeystoneFrame and ChallengesKeystoneFrame:IsVisible() then
-            OpenMythicKeyRdyFrame()
+-- Zentrales Event-Handling
+local eventHandler = CreateFrame("Frame")
+local events = {
+    "GROUP_ROSTER_UPDATE",
+    "PLAYER_ENTERING_WORLD",
+    "CHALLENGE_MODE_START",
+    "BAG_UPDATE_DELAYED",
+    "CHAT_MSG_ADDON"
+}
+
+for _, event in ipairs(events) do
+    eventHandler:RegisterEvent(event)
+end
+
+eventHandler:SetScript("OnEvent", function(self, event, ...)
+    if event == "CHAT_MSG_ADDON" then
+        local prefix, message, channel, sender = ...
+        if prefix == "MythicKey" and message == "StartCountdown" then
+            StartCountdown()
         end
+    else
+        OpenMythicKeyRdyFrame()
     end
 end)
 
--- Befehl zum Öffnen des MythicKey-Ready-Check-Fensters
+-- Slash-Befehl
 SLASH_MythicKeyRdy1 = "/mkrdy"
-SlashCmdList["MythicKeyRdy"] = function()
-    OpenMythicKeyRdyFrame()
-end
+SlashCmdList["MythicKeyRdy"] = OpenMythicKeyRdyFrame
 
 -- Countdown-Fenster
 local CountdownFrame = CreateFrame("Frame", "MythicKeyCountdownFrame", UIParent, "BackdropTemplate")
 CountdownFrame:SetSize(200, 100)
 CountdownFrame:SetPoint("CENTER")
 CountdownFrame:SetBackdrop({
-    bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
-    edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
-    tile = true,
-    tileSize = 16,
-    edgeSize = 16,
-    insets = { left = 4, right = 4, top = 4, bottom = 4 }
+    bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+    edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+    tile = true, tileSize = 32, edgeSize = 32,
+    insets = { left = 8, right = 8, top = 8, bottom = 8 }
 })
 CountdownFrame:SetBackdropColor(0, 0, 0, 0.8)
 CountdownFrame:Hide()
@@ -82,38 +88,21 @@ CountdownText:SetTextColor(1, 1, 1)
 local CountdownDuration = 10 -- Dauer des Countdowns in Sekunden
 
 local function StartCountdown()
-    local startTime = GetTime()
-    
+    local endTime = GetTime() + CountdownDuration
+    CountdownFrame:Show()
     CountdownFrame:SetScript("OnUpdate", function()
-        local elapsedTime = GetTime() - startTime
-        local remainingTime = CountdownDuration - elapsedTime
-        
+        local remainingTime = endTime - GetTime()
         if remainingTime > 0 then
-            CountdownText:SetText(string.format("%.0f", remainingTime))
+            CountdownText:SetText(math.ceil(remainingTime))
         else
-            CountdownText:SetText("0")
+            CountdownText:SetText("Go!")
+            C_Timer.After(1, function() CountdownFrame:Hide() end)
             CountdownFrame:SetScript("OnUpdate", nil)
-            CountdownFrame:Hide()
         end
     end)
-    
-    CountdownFrame:Show()
 end
 
 -- Verwende diese Funktion, um den Countdown zu starten
 function StartReadyCheckCountdown()
-    if IsAddOnLoaded("MythicKey") then
-        StartCountdown()
-    else
-        local playerGUID = UnitGUID("player")
-        C_ChatInfo.SendAddonMessage("MythicKey", "StartCountdown", "WHISPER", playerGUID)
-    end
+    StartCountdown()
 end
-
--- Überwache die Addon-Nachrichten, um den Countdown zu starten
-frame:RegisterEvent("CHAT_MSG_ADDON")
-frame:SetScript("OnEvent", function(self, event, prefix, message, channel, sender)
-    if prefix == "MythicKey" and message == "StartCountdown" then
-        StartCountdown()
-    end
-end)

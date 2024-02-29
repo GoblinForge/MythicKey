@@ -1,0 +1,17 @@
+{
+    "Lua.diagnostics.globals": [
+        "CreateFrame",
+        "NUM_BAG_FRAMES",
+        "print",
+        "ChallengesKeystoneFrame",
+        "C_Container",
+        "C_Timer",
+        "SlashCmdList",
+        "ipairs",
+        "UIParent",
+        "DoReadyCheck",
+        "GetTime",
+        "IsInGroup",
+        "math"
+    ]
+}
