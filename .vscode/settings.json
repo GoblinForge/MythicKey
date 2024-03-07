@@ -1,0 +1,7 @@
+{
+    "Lua.diagnostics.globals": [
+        "SlashCmdList",
+        "ChallengesKeystoneFrame",
+        "NUM_BAG_FRAMES"
+    ]
+}
