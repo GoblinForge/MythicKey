@@ -19,6 +19,8 @@ end)
 local StartButton = CreateFrame("Button", "MythicKeyRdyStartButton", MythicKeyRdyFrame, "UIPanelButtonTemplate")
 StartButton:SetSize(120, 25)
 StartButton:SetPoint("TOP", 0, -30)
+StartButton:SetSize(120, 25)
+StartButton:SetPoint("TOP", 0, -30)
 StartButton:SetText("Start Ready Check")
 StartButton:SetScript("OnClick", function()
     print("MythicKey: Ready check initiated. Please accept.")
@@ -27,11 +29,10 @@ StartButton:SetScript("OnClick", function()
 end)
 
 -- Erstelle den Close Button
+-- Erstelle den Close Button
 local CloseButton = CreateFrame("Button", "MythicKeyRdyCloseButton", MythicKeyRdyFrame, "UIPanelCloseButton")
 CloseButton:SetPoint("TOPRIGHT", -5, -5)
-CloseButton:SetScript("OnClick", function()
-    MythicKeyRdyFrame:Hide()
-end)
+CloseButton:SetScript("OnClick", function() MythicKeyRdyFrame:Hide() end)
 
 -- Funktion zum Öffnen des MythicKey-Ready-Check-Fensters
 local function OpenMythicKeyRdyFrame()
