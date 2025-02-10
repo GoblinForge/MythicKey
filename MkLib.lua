@@ -8,5 +8,5 @@ end
 -- code beispele: local myText = c("000000", "MK: ") .. c("FFA500", "Dein Text hier")
 
 function MkLib.mkt()
-    return MkLib.c("00beef", "MK")
+    return MkLib.c("00beef", "MythicKey")
 end

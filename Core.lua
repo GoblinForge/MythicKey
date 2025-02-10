@@ -1,28 +1,31 @@
 local c = MkLib.c
 local mkt = MkLib.mkt
+
 -- Registriert einen Slash-Befehl für dein Addon
 SLASH_MythicKey1 = "/mk"
 
 -- Funktion, die aufgerufen wird, wenn der Slash-Befehl verwendet wird
 function SlashCmdList.MythicKey(msg, editbox)
     -- msg enthält den Text, der nach dem Befehl eingegeben wurde.
-    -- Hier könntest du unterschiedliche Aktionen basierend auf 'msg' implementieren.
     local SpacerText = c("50ff45", "====================")
-    local MkCmmandlistHelp = c("00beef", "MythicKey SlashCmdList / Help:")
-    -- Beispiel: Zeige eine Liste von Befehlen, wenn keine spezifischen Argumente gegeben sind.
+    local MkCommandListHelp = c("00beef", "MythicKey SlashCmdList / Hilfe:")
+
     if msg == "" then
-        print(mkt)
+        -- Zeige eine Liste von Befehlen, wenn keine spezifischen Argumente gegeben sind
         print(SpacerText)
-        print(MkCmmandlistHelp)
+        print(MkCommandListHelp)
         print(SpacerText)
-        print("/mk - commandlist ")
-        print("/mkrdy - Open window for start ReadyCheck form MythicKeyRdy + Pull timer")
+        print("/mk - Befehlsliste anzeigen")
+        print("/mkrdy - Öffnet das Fenster für ReadyCheck von MythicKeyRdy + Pull Timer")
         print(SpacerText)
-        -- Füge hier weitere Befehle hinzu
     elseif msg == "help" then
-        print("Test1 Help:")
+        -- Zeige Hilfe für spezifische Befehle an
+        print("Test1 Hilfe:")
         print("/mk help - Zeigt diese Hilfe an.")
-        -- Füge hier Hilfe für spezifische Befehle hinzu
+        -- Weitere Hilfe für spezifische Befehle hinzufügen
+    else
+        -- Wenn ein unbekanntes Argument eingegeben wurde, zeige eine Fehlermeldung an
+        print(c("ff0000", "Unbekannter Befehl: ") .. msg)
+        print("Verwende '/mk help' für eine Liste der verfügbaren Befehle.")
     end
 end
-
