@@ -1,5 +1,5 @@
 # MythicKey
-![MythicKey Logo](link-zum-logo)
+![MythicKey Logo](https://github.com/2Luna/MythicKey/blob/main/logo-icon.png?raw=true)
 
 
 **MythicKey** is a World of Warcraft addon designed to enhance the **Mythic+ dungeon experience**. The addon focuses on automating key mechanics and improving dungeon coordination through optimized features. Future expansions will include integration with **GobLib**, providing advanced API functionalities such as the **Mythic+ Key Announcer**.
