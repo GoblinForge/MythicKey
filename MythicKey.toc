@@ -1,6 +1,12 @@
+<<<<<<< Updated upstream
 ## Interface: 110005, 110007
 ## Author: 2iLuna
 ## Version: 0.3.9
+=======
+## Interface: 110007, 110100
+## Author: 2iLuna
+## Version: 0.4.0
+>>>>>>> Stashed changes
 ## Title: MythicKey
 ## Notes: Automatic insertion of keystones into the source of power of mystical time and queries all are ready!
 ## IconTexture: Interface\Icons\inv_relics_hourglass_02
@@ -8,4 +14,3 @@ MkLib.lua
 Core.lua
 ReadyCheck.lua
 AutoKey.lua
-timer.lua
