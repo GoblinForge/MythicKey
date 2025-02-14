@@ -1,0 +1,8 @@
+## Interface: 110100
+## Title: Countdown Test Addon
+## Author: Aice
+## Version: 1.0
+## Notes: Ein einfacher Countdown-Button für Gruppenleiter
+## Dependencies: Blizzard_ChallengesUI
+
+CountdownTest.lua
