@@ -4,10 +4,10 @@
 ## Version: 0.3.9
 =======
 ## Interface: 110007, 110100
-## Author: 2iLuna
-## Version: 0.4.0
+## Author: |cffFFD700 GoblinForge|r - |cffB266FF Aice/2Luna |r
+## Version: 0.4.1
 >>>>>>> Stashed changes
-## Title: MythicKey
+## Title: |cffB266FF MythicKey |r
 ## Notes: Automatic insertion of keystones into the source of power of mystical time and queries all are ready!
 ## IconTexture: Interface\Icons\inv_relics_hourglass_02
 MkLib.lua
