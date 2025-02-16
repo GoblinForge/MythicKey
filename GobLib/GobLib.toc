@@ -1,0 +1,8 @@
+## Interface: 110100
+## Title: GobLib - Goblin Coding Library
+## Author: GoblinForge - Aice/2Luna
+## Version: 1.0
+## Notes: Library for 11.2 wow made by Goblins
+## Dependencies: Blizzard_ChallengesUI
+
+GobLib.lua
