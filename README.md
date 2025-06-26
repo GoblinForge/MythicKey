@@ -53,5 +53,5 @@ This addon was independently developed, and while similar ideas may exist, **Myt
 
 ## License
 
-**MythicKey** is released under the [MIT License](link-to-license).
+**MythicKey** is released under the [MIT License](LICENSE).
 
