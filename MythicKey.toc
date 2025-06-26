@@ -8,3 +8,4 @@ MkLib.lua
 Core.lua
 ReadyCheck.lua
 AutoKey.lua
+KeyAnnouncer.lua

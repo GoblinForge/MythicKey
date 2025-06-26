@@ -2,7 +2,7 @@
 ![MythicKey Logo](https://github.com/2Luna/MythicKey/blob/main/logo-icon.png?raw=true)
 
 
-**MythicKey** is a World of Warcraft addon designed to enhance the **Mythic+ dungeon experience**. The addon focuses on automating key mechanics and improving dungeon coordination through optimized features. Future expansions will include integration with **GobLib**, providing advanced API functionalities such as the **Mythic+ Key Announcer**.
+**MythicKey** is a World of Warcraft addon designed to enhance the **Mythic+ dungeon experience**. The addon focuses on automating key mechanics and improving dungeon coordination through optimized features. It now includes a built-in **Mythic+ Key Announcer** that can be toggled on or off.
 
 ## Features
 
@@ -14,7 +14,7 @@ The core reasons for developing **MythicKey** were:
 
 - **⏳ Pre-Pull Countdown** *(Planned Feature)*: After the ready check, a short countdown will notify the group before the dungeon starts, allowing Demon Hunters and others to prepare.
 
-- **📢 Mythic+ Key Announcer** *(Planned Feature as part of GobLib API)*: Announces your Mythic+ key to the group chat automatically when acquired, when a dungeon is completed, and when accepting a Mythic+ key from LFG for reference. This feature can be toggled on/off and will post only the key received from the leader (key host) to reduce unnecessary spam.
+- **📢 Mythic+ Key Announcer**: Announces your Mythic+ key to the group chat automatically when acquired, when a dungeon is completed, and when accepting a Mythic+ key from LFG for reference. This feature can be toggled on/off with the /mkann command and will post only the key received from the leader (key host) to reduce unnecessary spam.
 
 - **⏳ Mythic+ Timer (Planned Feature): Provides an in-game timer to help players track and optimize their Mythic+ dungeon run**.
 
@@ -32,6 +32,7 @@ Once installed, **MythicKey** will activate automatically when you open the **My
 
 - Your **Keystone** will be inserted without manual interaction.
 - A **Ready Check** will start to confirm your group is prepared.
+- Use `/mkann` to toggle the Mythic+ Key Announcer on or off.
 - *(More features will be added in future updates!)*
 
 ## Contributions & Support
