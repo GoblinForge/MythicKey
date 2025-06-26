@@ -2,53 +2,23 @@ local c = MkLib.c
 local cc = MkLib.cc
 local mkt = MkLib.mkt
 
-<<<<<<< Updated upstream
-=======
 local SpacerText        = c("50ff45", "====================")
 local MkCommandListHelp = c("50ff45", "SlashCmdList / Hilfe:")
 local MkHelp            = cc("00beef", "/mk", "FFFFFF", " - Befehlsliste anzeigen")
 local MyRdy             = cc("00beef", "/mkrdy", "FFFFFF", " - Öffnet das Fenster für ReadyCheck von MythicKeyRdy + Pull Timer")
 
->>>>>>> Stashed changes
 -- Registriert einen Slash-Befehl für dein Addon
 SLASH_MythicKey1 = "/mk"
 
 -- Funktion, die aufgerufen wird, wenn der Slash-Befehl verwendet wird
 function SlashCmdList.MythicKey(msg, editbox)
-<<<<<<< Updated upstream
-    -- msg enthält den Text, der nach dem Befehl eingegeben wurde.
-    local SpacerText = c("50ff45", "====================")
-    local MkCommandListHelp = c("00beef", "MythicKey SlashCmdList / Hilfe:")
-
-    if msg == "" then
-        -- Zeige eine Liste von Befehlen, wenn keine spezifischen Argumente gegeben sind
-        print(SpacerText)
-        print(MkCommandListHelp)
-        print(SpacerText)
-        print("/mk - Befehlsliste anzeigen")
-        print("/mkrdy - Öffnet das Fenster für ReadyCheck von MythicKeyRdy + Pull Timer")
-        print(SpacerText)
-    elseif msg == "help" then
-        -- Zeige Hilfe für spezifische Befehle an
-        print("Test1 Hilfe:")
-        print("/mk help - Zeigt diese Hilfe an.")
-        -- Weitere Hilfe für spezifische Befehle hinzufügen
-    else
-        -- Wenn ein unbekanntes Argument eingegeben wurde, zeige eine Fehlermeldung an
-        print(c("ff0000", "Unbekannter Befehl: ") .. msg)
-        print("Verwende '/mk help' für eine Liste der verfügbaren Befehle.")
-    end
-end
-=======
-    msg = msg or ""  -- Fallback, falls msg nil ist
-    msg = msg:trim() -- Entfernt überflüssige Leerzeichen (falls vorhanden)
-
-    -- Definiere die farbigen Textsegmente
+    msg = msg or ""      -- Fallback, falls msg nil ist
+    msg = msg:trim()     -- Überflüssige Leerzeichen entfernen
 
     if msg == "" then
         -- Zeige die Standardbefehlsliste an
         print(SpacerText)
-        print(mkt())  -- Funktionsaufruf, um den Rückgabewert zu erhalten
+        print(mkt())
         print(SpacerText)
         print(MkCommandListHelp)
         print(SpacerText)
@@ -60,13 +30,11 @@ end
         -- Zeige spezifische Hilfe an
         print("Test Hilfe:")
         print("/mk help - Zeigt diese Hilfe an.")
-        -- Zeige die Standardbefehlsliste an
         print(MkHelp)
         print(MyRdy)
         print(SpacerText)
-        -- Weitere Hilfe für spezifische Befehle hinzufügen
     else
-        -- Unbekannter Befehl: Fehlermeldung
+        -- Unbekannter Befehl
         print(SpacerText)
         print(c("ff0000", "Unbekannter Befehl: ") .. msg)
         print("Verwende '/mk help' für eine Liste der verfügbaren Befehle.")
@@ -140,4 +108,3 @@ do
     local category = Settings.RegisterCanvasLayoutCategory(interPanel, "MythicKey")
     Settings.RegisterAddOnCategory(category)
 end
->>>>>>> Stashed changes
