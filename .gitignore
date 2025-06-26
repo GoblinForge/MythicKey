@@ -1,0 +1,30 @@
+# IDE/editor folders
+.vscode/
+.idea/
+
+# OS junk files
+.DS_Store
+Thumbs.db
+
+# Backup and temporary files
+*.bak
+*.tmp
+*~
+*.swp
+*.swo
+
+# Compiled Lua
+*.luac
+
+# Build/packaging artifacts
+*.zip
+pkg/
+dist/
+release/
+.pkgmeta
+pkgmeta
+
+# WoW specific
+*.toc.bak
+*.lua.bak
+
