@@ -91,7 +91,11 @@ do
     -- Erweiterungstitel (Optional, falls du angeben willst, für welche Expansion das Addon entwickelt wurde)
     local expTitle = interPanel:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
     expTitle:SetPoint("TOP", 0, -152)
+<<<<<<< Updated upstream
     expTitle:SetText("TWW Season 1")
+=======
+    expTitle:SetText("TWW Season 3")
+>>>>>>> Stashed changes
     expTitle:SetFont(expTitle:GetFont(), 32)
 
     -- URL oder Beschreibung
